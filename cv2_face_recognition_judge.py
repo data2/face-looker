@@ -37,6 +37,7 @@ face_locations = []
 face_encodings = []
 face_names = []
 process_this_frame = True
+found = False
 
 while True:
     # Grab a single frame of video
@@ -70,6 +71,7 @@ while True:
             best_match_index = np.argmin(face_distances)
             if matches[best_match_index]:
                 name = known_face_names[best_match_index]
+                found = True
 
             face_names.append(name)
 
@@ -97,6 +99,8 @@ while True:
 
     # Hit 'q' on the keyboard to quit!
     if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+    if found:
         break
 
 # Release handle to the webcam
